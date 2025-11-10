@@ -1,0 +1,8 @@
+{
+  "name": "Component Layout Runner - COMPLETE",
+  "id": "component-layout-runner-complete-v1",
+  "api": "1.0.0",
+  "main": "code-test.js",
+  "ui": "ui.html",
+  "editorType": ["figma"]
+}

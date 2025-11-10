@@ -1,0 +1,879 @@
+{
+  "components": {
+    "box": {
+      "category": "primitive",
+      "description": "Pure structural container for spacing and surface styling. No layout or behavior.",
+      "props": {
+        "padding": {
+          "type": "enum",
+          "values": [
+            "none",
+            "s",
+            "m",
+            "l"
+          ],
+          "required": false
+        },
+        "background": {
+          "type": "enum",
+          "values": [
+            "ui-01",
+            "ui-02"
+          ],
+          "required": false
+        },
+        "radius": {
+          "type": "enum",
+          "values": [
+            "none",
+            "s",
+            "m"
+          ],
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [
+          "*"
+        ],
+        "cannotContain": []
+      },
+      "constraints": [
+        "mustNotDefineLayout",
+        "mustUseSemanticTokensOnly"
+      ]
+    },
+    "text": {
+      "category": "primitive",
+      "description": "Semantic text component for typography and hierarchy. Does not control layout or spacing.",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": [
+            "body",
+            "muted",
+            "caption"
+          ],
+          "required": false
+        },
+        "weight": {
+          "type": "enum",
+          "values": [
+            "regular",
+            "medium",
+            "bold"
+          ],
+          "required": false
+        },
+        "tagName": {
+          "type": "enum",
+          "values": [
+            "p",
+            "span",
+            "label"
+          ],
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [
+          "*"
+        ],
+        "cannotContain": []
+      },
+      "constraints": [
+        "mustUseTypographyTokensOnly",
+        "mustNotApplySpacing",
+        "mustNotControlLayout"
+      ]
+    },
+    "icon": {
+      "category": "primitive",
+      "description": "Visual decoration component. No interaction.",
+      "props": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "size": {
+          "type": "enum",
+          "values": [
+            "s",
+            "m",
+            "l"
+          ],
+          "required": false
+        },
+        "tone": {
+          "type": "enum",
+          "values": [
+            "default",
+            "muted",
+            "danger"
+          ],
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [],
+        "cannotContain": [
+          "*"
+        ]
+      },
+      "constraints": [
+        "mustNotHandleEvents",
+        "mustUseSemanticTonesOnly"
+      ]
+    },
+    "text-input": {
+      "category": "primitive",
+      "description": "Single-line text input field for raw value capture.",
+      "props": {
+        "value": {
+          "type": "string",
+          "required": false
+        },
+        "placeholder": {
+          "type": "string",
+          "required": false
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false
+        },
+        "error": {
+          "type": "boolean",
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [],
+        "cannotContain": [
+          "*"
+        ]
+      },
+      "constraints": [
+        "mustNotHandleValidationInternally",
+        "mustUseSemanticTokensOnly"
+      ]
+    },
+    "checkbox": {
+      "category": "primitive",
+      "description": "Binary selection component.",
+      "props": {
+        "checked": {
+          "type": "boolean",
+          "required": false
+        },
+        "label": {
+          "type": "string",
+          "required": false
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false
+        },
+        "error": {
+          "type": "boolean",
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [],
+        "cannotContain": [
+          "*"
+        ]
+      },
+      "constraints": [
+        "mustNotHandleEvents",
+        "mustUseSemanticTokensOnly"
+      ]
+    },
+    "radio-group": {
+      "category": "primitive",
+      "description": "Mutual exclusion selection group.",
+      "props": {
+        "options": {
+          "type": "array",
+          "required": true
+        },
+        "value": {
+          "type": "any",
+          "required": false
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false
+        },
+        "error": {
+          "type": "boolean",
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [],
+        "cannotContain": [
+          "*"
+        ]
+      },
+      "constraints": [
+        "mustNotHandleEvents",
+        "mustUseSemanticTokensOnly"
+      ]
+    },
+    "badge": {
+      "category": "primitive",
+      "description": "Small label component for status, counts, or categories.",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": false
+        },
+        "tone": {
+          "type": "enum",
+          "values": [
+            "info",
+            "success",
+            "warning",
+            "danger",
+            "neutral"
+          ],
+          "required": false
+        },
+        "variant": {
+          "type": "enum",
+          "values": [
+            "subtle",
+            "solid",
+            "outline"
+          ],
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [
+          "*"
+        ],
+        "cannotContain": []
+      },
+      "constraints": [
+        "mustUseSemanticTonesOnly"
+      ]
+    },
+    "card": {
+      "category": "primitive",
+      "description": "Surface container and visual grouping element.",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": [
+            "default",
+            "outlined"
+          ],
+          "required": false
+        },
+        "padding": {
+          "type": "enum",
+          "values": [
+            "s",
+            "m",
+            "l"
+          ],
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [
+          "*"
+        ],
+        "cannotContain": []
+      },
+      "constraints": [
+        "mustNotDefineLayout",
+        "mustUseSemanticTokensOnly"
+      ]
+    },
+    "table": {
+      "category": "data",
+      "description": "A structured data grid primitive for displaying information.",
+      "props": {
+        "headers": {
+          "type": "string[]",
+          "required": false
+        },
+        "data": {
+          "type": "any[]",
+          "required": false
+        },
+        "striped": {
+          "type": "boolean",
+          "required": false
+        },
+        "bordered": {
+          "type": "boolean",
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [],
+        "cannotContain": [
+          "*"
+        ]
+      },
+      "constraints": [
+        "mustNotImplementPagination",
+        "mustNotImplementSorting",
+        "mustNotImplementSelection",
+        "emptyStateTextIsFixedTo'No data available'"
+      ]
+    },
+    "spinner": {
+      "category": "feedback",
+      "description": "Pure visual loading indicator.",
+      "props": {
+        "size": {
+          "type": "enum",
+          "values": [
+            "s",
+            "m",
+            "l"
+          ],
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [],
+        "cannotContain": [
+          "*"
+        ]
+      },
+      "constraints": [
+        "mustBePurelyVisual",
+        "mustNotHandleStates"
+      ]
+    },
+    "skeleton": {
+      "category": "feedback",
+      "description": "A visual placeholder for loading states.",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": [
+            "text",
+            "block"
+          ],
+          "required": false
+        },
+        "width": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [],
+        "cannotContain": [
+          "*"
+        ]
+      },
+      "constraints": [
+        "mustNotContainRealContent",
+        "animationMustUseTokens"
+      ]
+    },
+    "banner": {
+      "category": "feedback",
+      "description": "A non-dismissible notification surface for displaying important messages.",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": [
+            "info",
+            "success",
+            "warning",
+            "danger"
+          ],
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [
+          "*"
+        ],
+        "cannotContain": []
+      },
+      "constraints": [
+        "mustNotBeDismissible",
+        "mustUseSemanticTonesOnly"
+      ]
+    },
+    "toast": {
+      "category": "feedback",
+      "description": "A transient notification primitive for brief messages.",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": [
+            "info",
+            "success",
+            "warning",
+            "danger"
+          ],
+          "required": false
+        },
+        "message": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "composition": {
+        "canContain": [],
+        "cannotContain": [
+          "*"
+        ]
+      },
+      "constraints": [
+        "mustBeRenderOnly",
+        "mustNotImplementQueueLogic"
+      ]
+    },
+    "button": {
+      "category": "action",
+      "description": "Action component for user interactions. Supports multiple variants, loading states, and icon composition.",
+      "model": "A",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": [
+            "primary",
+            "secondary",
+            "danger",
+            "ghost"
+          ],
+          "required": false
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false
+        },
+        "loading": {
+          "type": "boolean",
+          "required": false
+        },
+        "icon": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [
+          "*"
+        ],
+        "cannotContain": [
+          "button"
+        ]
+      },
+      "visuals": {
+        "backgroundColor": "#3B82F6",
+        "borderRadius": 6,
+        "height": 40
+      },
+      "constraints": [
+        "mustNotHandleRouting",
+        "mustNotControlPageLayout",
+        "mustNotDefineInternalNavigation"
+      ]
+    },
+    "icon-button": {
+      "category": "action",
+      "description": "Icon-only action component. No text support. Optimized for secondary or condensed actions.",
+      "model": "A",
+      "props": {
+        "icon": {
+          "type": "string",
+          "required": true
+        },
+        "variant": {
+          "type": "enum",
+          "values": [
+            "primary",
+            "secondary",
+            "danger",
+            "ghost"
+          ],
+          "required": false
+        },
+        "disabled": {
+          "type": "boolean",
+          "required": false
+        },
+        "loading": {
+          "type": "boolean",
+          "required": false
+        },
+        "ariaLabel": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [],
+        "cannotContain": [
+          "*"
+        ]
+      },
+      "constraints": [
+        "mustNotHandleRouting",
+        "mustNotContainText",
+        "mustBeAriaLabeled"
+      ]
+    },
+    "link": {
+      "category": "navigation",
+      "description": "Semantic anchor abstraction for internal or external navigation.",
+      "model": "A",
+      "props": {
+        "href": {
+          "type": "string",
+          "required": false
+        },
+        "variant": {
+          "type": "enum",
+          "values": [
+            "default",
+            "muted"
+          ],
+          "required": false
+        },
+        "icon": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [
+          "*"
+        ],
+        "cannotContain": []
+      },
+      "constraints": [
+        "mustNotHandleRoutingLogic",
+        "mustUseSemanticTokensOnly"
+      ]
+    },
+    "breadcrumb": {
+      "category": "navigation",
+      "description": "Hierarchical navigation component showing the path to the current page.",
+      "model": "A",
+      "props": {
+        "items": {
+          "type": "array",
+          "required": false
+        },
+        "separator": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [
+          "link"
+        ],
+        "cannotContain": [
+          "*"
+        ]
+      },
+      "constraints": [
+        "mustNotHandleRoutingLogic",
+        "mustUseSemanticTokensOnly"
+      ]
+    },
+    "top-nav": {
+      "category": "navigation",
+      "description": "Horizontal navigation bar container for branding, links, and actions.",
+      "model": "A",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": false
+        },
+        "bordered": {
+          "type": "boolean",
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [
+          "link",
+          "button",
+          "icon-button",
+          "*"
+        ],
+        "cannotContain": []
+      },
+      "visuals": {
+        "backgroundColor": "#FFFFFF",
+        "height": 64,
+        "borderBottom": "#E2E8F0"
+      },
+      "constraints": [
+        "mustNotHandleRoutingLogic",
+        "mustNotControlPageLayout",
+        "mustBeSemanticHeader"
+      ]
+    },
+    "side-nav": {
+      "category": "navigation",
+      "description": "Vertical navigation container for main application structure.",
+      "model": "A",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": false
+        },
+        "collapsed": {
+          "type": "boolean",
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [
+          "link",
+          "*"
+        ],
+        "cannotContain": []
+      },
+      "visuals": {
+        "backgroundColor": "#F8FAFC",
+        "width": 260
+      },
+      "constraints": [
+        "mustNotHandleRoutingLogic",
+        "mustNotControlPageLayout",
+        "mustSupportVerticalComposition"
+      ]
+    },
+    "calendar": {
+      "category": "data",
+      "description": "Complex date selection component with month/year navigation and day picker grid.",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "values": [
+            "default",
+            "range"
+          ],
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [
+          "calendar-button",
+          "icon-button",
+          "select",
+          "*"
+        ],
+        "cannotContain": []
+      },
+      "visuals": {
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": 8,
+        "padding": 16
+      },
+      "constraints": [
+        "mustUseStandardGrid",
+        "mustSupportKeyboardNavigation"
+      ]
+    },
+    "calendar-button": {
+      "category": "action",
+      "description": "Specific day cell within the calendar grid.",
+      "props": {
+        "number": {
+          "type": "string",
+          "required": true
+        },
+        "state": {
+          "type": "enum",
+          "values": [
+            "default",
+            "active",
+            "range",
+            "disabled",
+            "hidden"
+          ],
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [],
+        "cannotContain": [
+          "*"
+        ]
+      },
+      "visuals": {
+        "borderRadius": "50%",
+        "width": 32,
+        "height": 32
+      },
+      "constraints": [
+        "mustBeSquare"
+      ]
+    },
+    "star": {
+      "category": "feedback",
+      "description": "Rating indicator or favorite star component.",
+      "props": {
+        "link 5": {
+          "type": "string",
+          "required": false
+        },
+        "link 4": {
+          "type": "string",
+          "required": false
+        },
+        "link 3": {
+          "type": "string",
+          "required": false
+        },
+        "link 2": {
+          "type": "string",
+          "required": false
+        },
+        "link 1": {
+          "type": "string",
+          "required": false
+        },
+        "direction": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [
+          "*"
+        ],
+        "cannotContain": []
+      },
+      "visuals": {
+        "backgroundColor": "transparent",
+        "borderRadius": 0,
+        "padding": 0,
+        "layout": "HORIZONTAL"
+      },
+      "constraints": [
+        "mustBeOfficialized"
+      ]
+    },
+    "something": {
+      "category": "new-discovery",
+      "description": "Auto-detected component from Figma scan.",
+      "props": {
+        "label": {
+          "type": "string",
+          "required": false
+        },
+        "description": {
+          "type": "string",
+          "required": false
+        },
+        "has description": {
+          "type": "string",
+          "required": false
+        },
+        "state": {
+          "type": "string",
+          "required": false
+        },
+        "value type": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [
+          "*"
+        ],
+        "cannotContain": []
+      },
+      "visuals": {
+        "backgroundColor": "transparent",
+        "borderRadius": 0,
+        "padding": 0,
+        "layout": "VERTICAL"
+      },
+      "constraints": [
+        "mustBeOfficialized"
+      ]
+    },
+    "accordian": {
+      "category": "new-discovery",
+      "description": "Auto-detected component from Figma scan.",
+      "props": {
+        "content": {
+          "type": "string",
+          "required": false
+        },
+        "title": {
+          "type": "string",
+          "required": false
+        },
+        "state": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [
+          "*"
+        ],
+        "cannotContain": []
+      },
+      "visuals": {
+        "backgroundColor": "#f5f5f5",
+        "borderRadius": 8,
+        "padding": 16,
+        "layout": "HORIZONTAL"
+      },
+      "constraints": [
+        "mustBeOfficialized"
+      ]
+    },
+    "avatar": {
+      "category": "primitive",
+      "description": "Avatar component for displaying user initials or profile visuals.",
+      "props": {
+        "initials": {
+          "type": "string",
+          "required": false
+        },
+        "type": {
+          "type": "string",
+          "required": false
+        },
+        "size": {
+          "type": "string",
+          "required": false
+        },
+        "shape": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "composition": {
+        "canContain": [
+          "*"
+        ],
+        "cannotContain": []
+      },
+      "visuals": {
+        "backgroundColor": "#ffffff",
+        "borderRadius": 9999,
+        "padding": 0,
+        "layout": "NONE"
+      },
+      "constraints": [
+        "mustBeOfficialized"
+      ]
+    }
+  }
+}

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Secret Agents Governance</title>
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --bg-sidebar: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg-main);
+      color: var(--text-main);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* SIDEBAR (Left - Actions & List) */
+    .sidebar {
+      width: 300px;
+      /* Widened for more room */
+      min-width: 300px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      gap: 16px;
+      z-index: 10;
+      overflow-y: auto;
+    }
+
+    .branding {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 8px;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .team-logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 12px;
+      background: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .team-name {
+      font-weight: 800;
+      font-size: 16px;
+      color: #334155;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .btn {
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      text-align: center;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-primary:disabled {
+      background: #cbd5e1;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    /* MAIN CONTENT (Right - Big Pie Chart) */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: #ffffff;
+    }
+
+    .pie-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .pie-container {
+      position: relative;
+      width: 220px;
+      /* Large for "Hero" feel */
+      height: 220px;
+      flex-shrink: 0;
+    }
+
+    .pie-chart {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(var(--border) 0% 100%);
+      transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      /* Hollow center for Donut style */
+      mask: radial-gradient(circle, transparent 45%, black 46%);
+      -webkit-mask: radial-gradient(circle, transparent 45%, black 46%);
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.05);
+    }
+
+    .pie-score {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: 900;
+      font-size: 42px;
+    }
+
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      text-align: center;
+    }
+
+    .legend-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-bottom: 2px;
+    }
+
+    /* COMPONENT LIST (Inside Sidebar) */
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 8px;
+    }
+
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card {
+      background: #f8fafc;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .card-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .badge {
+      font-size: 8px;
+      font-weight: 800;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+
+    .badge-verified {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge-unknown {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .badge-violation {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    /* OVERLAY */
+    #fragment-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      width: 85%;
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    }
+
+    pre {
+      background: #0f172a;
+      color: #38bdf8;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 10px;
+      max-height: 180px;
+      overflow: auto;
+    }
+
+    /* EMPTY STATE */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--text-muted);
+      gap: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sidebar">
+    <!-- BRANDING -->
+    <div class="branding">
+      <div class="team-logo">
+        <img src="https://i.postimg.cc/mkcxz4Qk/secret-agents.jpg" alt="Secret Agents Logo"
+          style="width:100%; height:100%; object-fit:contain;">
+      </div>
+      <div class="team-name" style="white-space: nowrap;">Secret Agents</div>
+    </div>
+
+    <button id="scan-validate-btn" class="btn btn-primary">Scan Design</button>
+
+    <div id="sidebar-results" style="display: none;">
+      <h3 class="section-title">Validation Details</h3>
+      <div id="component-list" class="card-list"></div>
+
+      <div id="export-actions" style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+        <button id="export-json-btn" class="btn btn-secondary">Export compliant JSON</button>
+      </div>
+    </div>
+
+    <div
+      style="margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border); font-size: 10px; color: var(--text-muted); text-align: center;">
+      v3.0 Agentic Edition
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div id="welcome-state" class="empty-state">
+      <div style="font-size: 48px;">🏢</div>
+      <div>
+        <div style="font-weight: 800; color: var(--text-main); font-size: 20px;">Governance Hub</div>
+        <div style="font-size: 13px; margin-top: 4px;">Select a design system frame to verify compliance.</div>
+      </div>
+    </div>
+
+    <div id="results-state" style="display: none;">
+      <div class="pie-hero">
+        <div class="pie-container">
+          <div id="pie-chart" class="pie-chart"></div>
+          <div id="pie-percentage" class="pie-score">--</div>
+        </div>
+
+        <div class="legend-grid">
+          <div class="legend-item">
+            <div class="dot" style="background:var(--success)"></div> Compliant<br /><span id="count-pass"
+              style="font-size:16px">0</span>
+          </div>
+          <div class="legend-item">
+            <div class="dot" style="background:var(--warning)"></div> Warnings<br /><span id="count-minor"
+              style="font-size:16px">0</span>
+          </div>
+          <div class="legend-item">
+            <div class="dot" style="background:var(--danger)"></div> Critical<br /><span id="count-critical"
+              style="font-size:16px">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div id="fragment-overlay">
+    <div class="modal">
+      <h3 style="margin:0 0 8px 0; font-size:16px;">Officialization Law</h3>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">Copy this law to register the
+        <b>Unknown</b> component pattern.
+      </p>
+      <pre id="fragment-code"></pre>
+      <button id="copy-fragment-btn" class="btn btn-primary" style="margin-top:16px;">Copy Fragment</button>
+      <button onclick="closeModal()" class="btn btn-secondary" style="margin-top:8px;">Cancel</button>
+    </div>
+  </div>
+
+  <script>
+    const scanBtn = document.getElementById('scan-validate-btn');
+    const exportBtn = document.getElementById('export-json-btn');
+    const sidebarResults = document.getElementById('sidebar-results');
+    const welcomeState = document.getElementById('welcome-state');
+    const resultsState = document.getElementById('results-state');
+    const componentList = document.getElementById('component-list');
+    const pieChart = document.getElementById('pie-chart');
+    const piePercentage = document.getElementById('pie-percentage');
+
+    const countPass = document.getElementById('count-pass');
+    const countMinor = document.getElementById('count-minor');
+    const countCritical = document.getElementById('count-critical');
+
+    let fragmentRegister = {};
+    let lastDesign = null;
+
+    function closeModal() { document.getElementById('fragment-overlay').style.display = 'none'; }
+    function showFragment(id) {
+      document.getElementById('fragment-code').textContent = JSON.stringify(fragmentRegister[id], null, 2);
+      document.getElementById('fragment-overlay').style.display = 'flex';
+      document.getElementById('copy-fragment-btn').textContent = 'Copy Fragment';
+    }
+
+    document.getElementById('copy-fragment-btn').addEventListener('click', (e) => {
+      const text = document.getElementById('fragment-code').textContent;
+      const el = document.createElement('textarea'); el.value = text;
+      document.body.appendChild(el); el.select(); document.execCommand('copy');
+      document.body.removeChild(el); e.target.textContent = '✅ Copied!';
+      setTimeout(() => e.target.textContent = 'Copy Fragment', 2000);
+    });
+
+    scanBtn.addEventListener('click', () => {
+      scanBtn.disabled = true;
+      scanBtn.textContent = 'Investigating...';
+      parent.postMessage({ pluginMessage: { type: 'validate-design' } }, '*');
+    });
+
+    exportBtn.addEventListener('click', () => {
+      const el = document.createElement('textarea'); el.value = JSON.stringify(lastDesign, null, 2);
+      document.body.appendChild(el); el.select(); document.execCommand('copy');
+      document.body.removeChild(el); exportBtn.textContent = '✅ JSON Copied';
+      setTimeout(() => exportBtn.textContent = 'Export compliant JSON', 2000);
+    });
+
+    window.onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      if (msg.type === 'validation-result') {
+        scanBtn.disabled = false;
+        scanBtn.textContent = 'Scan Design';
+        welcomeState.style.display = 'none';
+        resultsState.style.display = 'block';
+        sidebarResults.style.display = 'block';
+
+        lastDesign = msg.designData;
+        fragmentRegister = {};
+
+        // 1. Update Pie Chart (Score-Centric Logic)
+        const { breakdown, score, components, violations, valid } = msg;
+
+        // CRITICAL FIX: The Green segment MUST represent the Score exactly.
+        const pPass = score;
+        const pLoss = 100 - score;
+
+        // Distribute the "Error/Warning" area based on violation weight
+        const totalWeight = (breakdown.CRITICAL * 4) + (breakdown.MAJOR * 2) + breakdown.MINOR || 1;
+        const pCrit = (((breakdown.CRITICAL * 4)) / totalWeight) * pLoss;
+        const pWarn = pLoss - pCrit;
+
+        // conic-gradient segments
+        pieChart.style.background = `conic-gradient(
+          #22c55e 0% ${pPass}%, 
+          #ef4444 ${pPass}% ${pPass + pCrit}%, 
+          #f59e0b ${pPass + pCrit}% 100%
+        )`;
+
+        piePercentage.textContent = `${score}%`;
+        piePercentage.style.color = score >= 90 ? '#166534' : (score >= 70 ? '#92400e' : '#991b1b');
+
+        countPass.textContent = breakdown.PASS;
+        countMinor.textContent = breakdown.MINOR + breakdown.MAJOR;
+        countCritical.textContent = breakdown.CRITICAL;
+
+        componentList.innerHTML = '';
+        components.forEach((comp, idx) => {
+          if (comp.fragment) fragmentRegister[idx] = comp.fragment;
+          const card = document.createElement('div'); card.className = 'card';
+          const compViolations = (violations || []).filter(v => v.nodeName === comp.name);
+          card.innerHTML = `
+            <div class="card-row">
+              <span style="font-weight:700; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; width:140px;">${comp.name}</span>
+              <span class="badge badge-${comp.status.toLowerCase()}">${comp.status}</span>
+            </div>
+            ${comp.status === 'UNKNOWN' ? `<button class="btn btn-secondary" style="padding:4px; font-size:9px; margin-top:4px;" onclick="showFragment(${idx})">OFFICIALIZE</button>` : ''}
+          `;
+          if (compViolations.length > 0) {
+            const vBox = document.createElement('div'); vBox.style.marginTop = '4px'; vBox.style.borderTop = '1px dashed #e2e8f0'; vBox.style.paddingTop = '4px';
+            compViolations.forEach(v => { vBox.innerHTML += `<div style="font-size:9px; margin-bottom:2px"><span style="color:var(--danger); font-weight:700;">[${v.severity}]</span> ${v.message}</div>`; });
+            card.appendChild(vBox);
+          }
+          componentList.appendChild(card);
+        });
+        document.getElementById('export-actions').style.display = valid ? 'flex' : 'none';
+      }
+      if (msg.type === 'selection-error') { scanBtn.disabled = false; scanBtn.textContent = 'Scan Design'; alert(msg.message); }
+    };
+  </script>
+</body>
+
+</html>

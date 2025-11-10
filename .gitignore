@@ -1,0 +1,47 @@
+# Professional .gitignore for Agentic Design System
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Logs
+*.log
+*_output.txt
+audit_trail_report.txt
+box_sync_audit.log
+debug-storybook.log
+final_audit_report.txt
+storybook.log
+sync_output.txt
+sync_output_v2.txt
+text_sync_error.log
+test-results.txt
+
+# Environment / Secrets
+.env
+.env.*
+*.key
+*.pem
+secrets.json
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Fragments & Redundant Files
+code-generator-pipeline.js-snippet
+system design.txt
+system-design.json
+check-models.js
+test-gemini-analyzer.js
+test-injection.js
+test-mcp-validation.js
+
+# Coverage
+coverage/
+*.lcov
