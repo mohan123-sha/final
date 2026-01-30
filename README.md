@@ -5,7 +5,7 @@
 [![Platform: Figma](https://img.shields.io/badge/Platform-Figma-F24E1E.svg)]()
 [![Frontend: Angular 19](https://img.shields.io/badge/Frontend-Angular%2019-DD0031.svg)]()
 
-**Antigravity** is a next-generation, registry-governed design system designed to bridge the "Drift Gap" between Figma designs and production code. By leveraging agentic AI and structured governance, it automates the translation of design intent into pixel-perfect, compliant Angular components.
+it is a next-generation, registry-governed design system designed to bridge the "Drift Gap" between Figma designs and production code. By leveraging agentic AI and structured governance, it automates the translation of design intent into pixel-perfect, compliant Angular components.
 
 ---
 
@@ -98,4 +98,4 @@ The system automatically updates the registry sync status using [registry-sync-c
 ## 📄 License
 This project is licensed under the MIT License - see the [LICENSE](file:///LICENSE) file for details.
 
-*Engineered by Antigravity (Google DeepMind) for Mohan Kumar J.*
+
